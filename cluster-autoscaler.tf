@@ -3,7 +3,7 @@ resource "google_service_account" "k8s_autoscaler_service_account" {
   display_name = "K8S Cluster Autoscaler"
 }
 
-resource "google_project_iam_member" "k8s_autoscaler_service_account_role_binding" {
+resource "google_project_iam_binding" "k8s_autoscaler_service_account_role_binding" {
   project = var.gcp_project_id
   role    = "roles/compute.instanceAdmin.v1"
 
@@ -65,7 +65,7 @@ resource "helm_release" "cluster_autoscaler" {
       "rbac" : {
         "serviceAccount" : {
           "annotations" : {
-            "iam.gke.io/gcp-service-account" : module.cluster_autoscaler_iam_service_acount.service_account_name
+            "iam.gke.io/gcp-service-account" : "k8s-cluster-autoscaler@${var.gcp_project_id}.iam.gserviceaccount.com"
           },
           "create" : true,
           "name" : "cluster-autoscaler",
