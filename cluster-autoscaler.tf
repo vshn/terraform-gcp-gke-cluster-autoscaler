@@ -1,20 +1,25 @@
-module "cluster_autoscaler_iam_service_account" {
-  source  = "terraform-google-modules/iam/google"
-  version = "7.7.0"
-
-  role_name                        = format("%s-cluster-autoscaler-role", var.cluster_name)
-  role_description                 = format("Allows %s assume role permissions in %s", var.cluster_name, var.region)
-  attach_cluster_autoscaler_policy = true
-  cluster_autoscaler_cluster_names = [var.cluster_name]
-
-  oidc_providers = {
-    ex = {
-      provider_arn               = var.oidc_provider_arn
-      namespace_service_accounts = ["kube-system:cluster-autoscaler"]
-    }
-  }
+resource "google_service_account" "k8s_autoscaler_service_account" {
+  account_id   = "k8s-cluster-autoscaler"
+  display_name = "K8S Cluster Autoscaler"
 }
 
+resource "google_project_iam_member" "k8s_autoscaler_service_account_role_binding" {
+  project = var.gcp_project_id
+  role    = "roles/compute.instanceAdmin.v1"
+
+  members = [
+    "serviceAccount:k8s-cluster-autoscaler@${var.gcp_project_id}.iam.gserviceaccount.com",
+  ]
+}
+
+resource "google_project_iam_binding" "k8s_autoscaler_binding" {
+  project = var.gcp_project_id
+  role    = "roles/iam.workloadIdentityUser"
+
+  members = [
+    "serviceAccount:${var.gcp_project_id}.svc.id.goog[kube-system/cluster-autoscaler-gce-cluster-autoscaler]",
+  ]
+}
 resource "kubernetes_labels" "kube_system_monitoring" {
   count = var.cluster_autoscaler_servicemonitor_enabeld ? 1 : 0
 
@@ -44,18 +49,23 @@ resource "helm_release" "cluster_autoscaler" {
         "clusterName" : var.cluster_name,
       }
       "cloudProvider" : "gce"
+      "autoscalingGroupsnamePrefix": [
+        {
+          "name": var.instance_group_prefix,
+          "maxSize": 3,
+          "minSize": 1
+        }
+      ]
       "extraArgs" : {
         "leader-elect" : false
       }
       "image" : {
-        "tag" : var.image_ve
+        "tag" : var.cluster_autoscaler_image_version
         }
       "rbac" : {
-        "create" : true,
-        "pspEnabled" : true,
         "serviceAccount" : {
           "annotations" : {
-            "iam.gke.io/gcp-service-account" : module.cluster_autoscaler_iam_service_acount.
+            "iam.gke.io/gcp-service-account" : module.cluster_autoscaler_iam_service_acount.service_account_name
           },
           "create" : true,
           "name" : "cluster-autoscaler",

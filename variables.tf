@@ -3,13 +3,13 @@ variable "cluster_name" {
   type        = string
 }
 
-variable "region" {
-  description = "Region of the Google GKE Cluster"
+variable "instance_group_prefix" {
+  description = "The common prefix of the instance groups node names"
   type        = string
 }
 
-variable "oidc_provider_arn" {
-  description = "OIDC Provider ARN which is used by AWS EKS Cluster"
+variable "gcp_project_id" {
+  description = "The ID of the project where the GKE cluster is running within."
   type        = string
 }
 
@@ -27,6 +27,11 @@ variable "cluster_autoscaler_helm_chart_repository" {
 
 variable "cluster_autoscaler_helm_chart_version" {
   description = "Helm chart version for the cluster-autoscaler. See https://github.com/kubernetes/autoscaler/tree/master/charts/cluster-autoscaler for more details."
+  type        = string
+}
+
+variable "cluster_autoscaler_image_version" {
+  description = "The image version of must match the current GKE version up to it's minor patch, e.g. 'v1.25.0'"
   type        = string
 }
 
