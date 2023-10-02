@@ -49,11 +49,11 @@ resource "helm_release" "cluster_autoscaler" {
         "clusterName" : var.cluster_name,
       }
       "cloudProvider" : "gce"
-      "autoscalingGroupsnamePrefix": [
+      "autoscalingGroupsnamePrefix" : [
         {
-          "name": var.instance_group_prefix,
-          "maxSize": 3,
-          "minSize": 1
+          "name" : var.instance_group_prefix,
+          "maxSize" : 3,
+          "minSize" : 1
         }
       ]
       "extraArgs" : {
@@ -61,7 +61,7 @@ resource "helm_release" "cluster_autoscaler" {
       }
       "image" : {
         "tag" : var.cluster_autoscaler_image_version
-        }
+      }
       "rbac" : {
         "serviceAccount" : {
           "annotations" : {
