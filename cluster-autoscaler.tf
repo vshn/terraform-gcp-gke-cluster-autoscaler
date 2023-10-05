@@ -84,7 +84,7 @@ resource "helm_release" "cluster_autoscaler" {
         }
       }
       "serviceMonitor" : {
-        "enabled" : var.cluster_autoscaler_servicemonitor_enabeld
+        "enabled" : var.cluster_autoscaler_servicemonitor_enabled
         "namespace" : "kube-system"
         "selector" : var.cluster_autoscaler_servicemonitor_selectors
       }

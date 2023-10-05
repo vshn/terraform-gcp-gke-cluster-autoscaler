@@ -47,7 +47,7 @@ variable "cluster_autoscaler_image_version" {
   type        = string
 }
 
-variable "cluster_autoscaler_servicemonitor_enabeld" {
+variable "cluster_autoscaler_servicemonitor_enabled" {
   description = "If true, creates a Prometheus Operator ServiceMonitor."
   type        = bool
   default     = true
