@@ -51,9 +51,9 @@ resource "helm_release" "cluster_autoscaler" {
       "cloudProvider" : "gce"
       "autoscalingGroupsnamePrefix" : [
         {
-          "name" : var.instance_group_prefix,
-          "maxSize" : 3,
-          "minSize" : 1
+          "name" : var.worker_asg_prefix,
+          "maxSize" : var.worker_asg_max_size,
+          "minSize" : var.worker_asg_min_size
         }
       ]
       "extraArgs" : {

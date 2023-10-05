@@ -3,7 +3,7 @@ variable "cluster_name" {
   type        = string
 }
 
-variable "instance_group_prefix" {
+variable "worker_asg_prefix" {
   description = "The common prefix of the instance groups node names"
   type        = string
 }
