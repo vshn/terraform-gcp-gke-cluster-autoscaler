@@ -21,7 +21,7 @@ resource "google_project_iam_binding" "k8s_autoscaler_binding" {
   ]
 }
 resource "kubernetes_labels" "kube_system_monitoring" {
-  count = var.cluster_autoscaler_servicemonitor_enabeld ? 1 : 0
+  count = var.cluster_autoscaler_servicemonitor_enabled ? 1 : 0
 
   api_version = "v1"
   kind        = "Namespace"
