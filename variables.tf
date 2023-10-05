@@ -8,6 +8,18 @@ variable "worker_asg_prefix" {
   type        = string
 }
 
+variable "worker_asg_min_size" {
+  type        = string
+  description = "K8s worker autoscaling group minimum size"
+  default     = 1
+}
+
+variable "worker_asg_max_size" {
+  type        = string
+  description = "K8s worker autoscaling group maximum size"
+  default     = 1
+}
+
 variable "gcp_project_id" {
   description = "The ID of the project where the GKE cluster is running within."
   type        = string
