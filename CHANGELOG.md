@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.3.0
+
+- Adjust AutoscalingGroupPrefix to correct variable
+
 ## v1.2.0
 
 - Fix k8s SA Binding

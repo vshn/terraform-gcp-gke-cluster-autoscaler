@@ -51,7 +51,7 @@ resource "helm_release" "cluster_autoscaler" {
       "cloudProvider" : "gce"
       "autoscalingGroupsnamePrefix" : [
         {
-          "name" : var.worker_asg_prefix,
+          "name" : terraform.workspace,
           "maxSize" : var.worker_asg_max_size,
           "minSize" : var.worker_asg_min_size
         }
