@@ -17,7 +17,7 @@ resource "google_project_iam_binding" "k8s_autoscaler_binding" {
   role    = "roles/iam.workloadIdentityUser"
 
   members = [
-    "serviceAccount:${var.gcp_project_id}.svc.id.goog[kube-system/cluster-autoscaler-gce-cluster-autoscaler]",
+    "serviceAccount:${var.gcp_project_id}.svc.id.goog[kube-system/cluster-autoscaler]",
   ]
 }
 resource "kubernetes_labels" "kube_system_monitoring" {
