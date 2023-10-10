@@ -3,11 +3,6 @@ variable "cluster_name" {
   type        = string
 }
 
-variable "worker_asg_prefix" {
-  description = "The common prefix of the instance groups node names"
-  type        = string
-}
-
 variable "worker_asg_min_size" {
   type        = string
   description = "K8s worker autoscaling group minimum size"

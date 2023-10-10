@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.3.2
+
+- Remove unused variable "worker_asg_prefix"
+
 ## v1.3.1
 
 - Adjust AutoscalingGroupPrefix to correct variable (once more, oopsie daisy!)
