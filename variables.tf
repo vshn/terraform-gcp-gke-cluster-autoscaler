@@ -55,3 +55,8 @@ variable "cluster_autoscaler_servicemonitor_selectors" {
     "monitoring.syn.tools/enabled" : "true"
   }
 }
+
+variable "instance_groups" {
+  description = "List of instance group urls to autoscale"
+  type        = list(string)
+}
