@@ -35,7 +35,7 @@ resource "kubernetes_labels" "kube_system_monitoring" {
 
 locals {
   autoscaling_groups = [
-    for group in var.instance_groups : {
+    for group in var.instance_group_urls : {
       name    = group,
       maxSize = var.worker_asg_max_size,
       minSize = var.worker_asg_min_size,

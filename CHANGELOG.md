@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.4.0
+
+- Dynamically set instance groups based on input
+
 ## v1.3.2
 
 - Remove unused variable "worker_asg_prefix"

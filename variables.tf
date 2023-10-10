@@ -56,7 +56,7 @@ variable "cluster_autoscaler_servicemonitor_selectors" {
   }
 }
 
-variable "instance_groups" {
+variable "instance_group_urls" {
   description = "List of instance group urls to autoscale"
   type        = list(string)
 }
