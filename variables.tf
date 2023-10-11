@@ -37,11 +37,6 @@ variable "cluster_autoscaler_helm_chart_version" {
   type        = string
 }
 
-variable "cluster_autoscaler_image_version" {
-  description = "The image version of must match the current GKE version up to it's minor patch, e.g. 'v1.25.0'"
-  type        = string
-}
-
 variable "cluster_autoscaler_servicemonitor_enabled" {
   description = "If true, creates a Prometheus Operator ServiceMonitor."
   type        = bool

@@ -63,9 +63,6 @@ resource "helm_release" "cluster_autoscaler" {
       "extraArgs" : {
         "leader-elect" : false
       }
-      "image" : {
-        "tag" : var.cluster_autoscaler_image_version
-      }
       "rbac" : {
         "serviceAccount" : {
           "annotations" : {

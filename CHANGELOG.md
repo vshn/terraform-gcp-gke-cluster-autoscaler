@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.4.1
+
+- Remove ImageVersion variable since its not required anymore
+
 ## v1.4.0
 
 - Dynamically set instance groups based on input
