@@ -3,16 +3,13 @@ variable "cluster_name" {
   type        = string
 }
 
-variable "worker_asg_min_size" {
-  type        = string
-  description = "K8s worker autoscaling group minimum size"
-  default     = 1
-}
-
-variable "worker_asg_max_size" {
-  type        = string
-  description = "K8s worker autoscaling group maximum size"
-  default     = 1
+variable "autoscaling_groups" {
+  description = "List of autoscaling groups to target"
+  type = list(object({
+    name    = string
+    minSize = optional(number, 1)
+    maxSize = optional(number, 1)
+  }))
 }
 
 variable "gcp_project_id" {
@@ -49,9 +46,4 @@ variable "cluster_autoscaler_servicemonitor_selectors" {
   default = {
     "monitoring.syn.tools/enabled" : "true"
   }
-}
-
-variable "instance_group_urls" {
-  description = "List of instance group urls to autoscale"
-  type        = list(string)
 }

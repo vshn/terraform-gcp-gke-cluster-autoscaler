@@ -33,16 +33,6 @@ resource "kubernetes_labels" "kube_system_monitoring" {
   }
 }
 
-locals {
-  autoscaling_groups = [
-    for group in var.instance_group_urls : {
-      name    = group,
-      maxSize = var.worker_asg_max_size,
-      minSize = var.worker_asg_min_size,
-    }
-  ]
-}
-
 resource "helm_release" "cluster_autoscaler" {
   atomic          = true
   chart           = var.cluster_autoscaler_helm_chart_name
@@ -59,7 +49,7 @@ resource "helm_release" "cluster_autoscaler" {
         "clusterName" : var.cluster_name,
       }
       "cloudProvider" : "gce"
-      "autoscalingGroups" : local.autoscaling_groups
+      "autoscalingGroups" : var.autoscaling_groups
       "extraArgs" : {
         "leader-elect" : false
       }
