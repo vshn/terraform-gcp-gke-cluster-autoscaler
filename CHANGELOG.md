@@ -1,5 +1,13 @@
 # Changelog
 
+## v2.0.0
+
+- Remove variables
+  - `worker_asg_min_size`
+  - `worker_asg_max_size`
+  - `instance_group_urls`
+- Add `autoscaling_groups` variable
+
 ## v1.4.1
 
 - Remove ImageVersion variable since its not required anymore
