@@ -1,9 +1,5 @@
 # Changelog
 
-## v2.0.1
-
-- Update terraform to v1.7.0
-
 ## v2.0.0
 
 - Remove variables
