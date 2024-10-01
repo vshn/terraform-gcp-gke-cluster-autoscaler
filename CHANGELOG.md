@@ -1,5 +1,8 @@
 # Changelog
 
+## v2.1.0
+- Lower resource requests and limits
+
 ## v2.0.0
 
 - Remove variables
